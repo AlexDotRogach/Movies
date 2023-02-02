@@ -1,0 +1,10 @@
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  color: #010101;
+  margin-top: 20px;
+}
