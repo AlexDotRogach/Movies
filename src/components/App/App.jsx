@@ -7,6 +7,7 @@ import SharedLayout from '../../layouts/SharedLayout';
 import Home from '../../pages/Home';
 import Movies from '../../pages/Movies';
 import MoviesDetail from '../../pages/MoviesDetail';
+import Cast from '../Cast';
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,10 @@ const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="movies" element={<Movies />} />
-          <Route path="movies/:moviesId" element={<MoviesDetail />} />
+          <Route path="movies/:moviesId" element={<MoviesDetail />}>
+            <Route path="cast" element={<Cast />}></Route>
+            <Route path="reviews"></Route>
+          </Route>
         </Route>
       </Routes>
       <ReactQueryDevtools />

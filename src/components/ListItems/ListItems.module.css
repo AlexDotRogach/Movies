@@ -6,8 +6,6 @@
 .listItem {
   composes: flexColumn;
 
-  width: 250px;
-
   margin-top: 5px;
 
   transition: transform 1.2s;

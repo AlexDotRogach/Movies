@@ -1,5 +1,6 @@
 .detail {
   padding: 20px;
+  font-size: var(--fsText);
 }
 
 .goBack {
@@ -10,6 +11,7 @@
   padding: 5px;
   transition: padding .3s;
   box-shadow: 1px 1px 3px black;
+  font-size: var(--fsText-sm);
 }
 
 .goBack:hover {
@@ -19,7 +21,9 @@
 
 .goBackError {
   composes: goBack;
-  margin: 30px 0 0 20px;
+  position: absolute;
+  top: 80px;
+  left: 20px;
 }
 
 .detailInfo {
@@ -41,4 +45,38 @@
 
 .movieTitle {
   text-align: center;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.movieScore {
+  display: flex;
+  gap: 5px;
+}
+
+.movieScoreText {
+  font-weight: bold;
+}
+
+.movieOverviewTitle {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.movieOverviewText {
+  display: inline-block;
+  text-align: justify;
+}
+
+.movieGenres {
+  display: flex;
+  gap: 5px;
+}
+
+.movieGenreTitle {
+  font-weight: bold;
 }

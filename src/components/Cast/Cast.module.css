@@ -1,0 +1,24 @@
+
+.cast {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 150px);
+  justify-content: center;
+  gap: 10px 30px;
+  margin-top: 20px;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.persontText {
+  display: flex;
+  flex-direction: column;
+}
+
+.personTitle {
+  font-weight: bold;
+}

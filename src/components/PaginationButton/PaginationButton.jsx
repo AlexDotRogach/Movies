@@ -1,6 +1,6 @@
 import css from './PaginationButton.module.css';
 import Pagination from '@mui/material/Pagination';
-const PaginationButton = ({ total, changePage }) => {
+const PaginationButton = ({ page, total, changePage }) => {
   const handleChange = (event, value) => changePage(value);
 
   return (
@@ -11,6 +11,8 @@ const PaginationButton = ({ total, changePage }) => {
         showLastButton
         color="primary"
         onChange={handleChange}
+        size="large"
+        page={page}
       />
     </div>
   );

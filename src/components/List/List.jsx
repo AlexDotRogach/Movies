@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getTrendingDay } from '../../services/movieApi/api';
 import Loader from '../../layouts/Loader';
+import Error from '../../layouts/Error';
+import { messages } from '../../const/messages';
+
+const { errorMessage } = messages;
 const List = ({ page, changeTotalPage }) => {
   const [totalPage, setTotalPage] = useState(0);
 
@@ -18,9 +22,8 @@ const List = ({ page, changeTotalPage }) => {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return <span>Error: {error.message}</span>;
-
-  if (!data) return <span>Sorry but we have troubles</span>;
+  if (isError || !data)
+    return <Error error={error.message ?? errorMessage}></Error>;
 
   const {
     data: { results: movies, total_pages },

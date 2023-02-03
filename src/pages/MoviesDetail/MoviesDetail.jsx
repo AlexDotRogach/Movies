@@ -4,21 +4,26 @@ import {
   getCastById,
   getReviewsById,
 } from '../../services/movieApi/api';
-import { useParams, useLocation, Link } from 'react-router-dom';
+import {
+  useParams,
+  useLocation,
+  Link,
+  NavLink,
+  Outlet,
+} from 'react-router-dom';
 import { useQueries } from 'react-query';
 import Loader from '../../layouts/Loader';
 import Error from '../../layouts/Error';
-const App = () => {
+const MoviesDetail = () => {
   const { moviesId } = useParams();
-  const location = useLocation();
-  const {
-    state: { pageFrom },
-  } = location;
+  const { state } = useLocation();
+
+  const pageFrom = state?.pageFrom ?? 1;
 
   const movieInfoQueries = useQueries([
     {
       queryKey: `getMovieById-${moviesId}`,
-      queryFn: () => getMovieById(23),
+      queryFn: () => getMovieById(moviesId),
     },
 
     {
@@ -42,7 +47,7 @@ const App = () => {
   if (!movieRender)
     return (
       <>
-        <Link to="/" className={css.goBackError}>
+        <Link to="/" className={css.goBackError} state={{ pageFrom }}>
           Go back
         </Link>
         <Error error="This movie isn`t found"></Error>
@@ -51,34 +56,59 @@ const App = () => {
 
   const {
     data: {
-      data: { poster_path, title, name },
+      data: { poster_path, title, name, vote_average, overview, genres },
     },
   } = movieQuery;
 
   const movieName = title || name;
+  const score = Math.round(vote_average * 10);
 
   return (
     <section className={css.detail}>
-      <Link to="/" className={css.goBack}>
+      <Link to="/" className={css.goBack} state={{ pageFrom }}>
         Go back
       </Link>
 
-      {movieRender && (
-        <main className={css.detailInfo}>
-          <div className={css.imageWrapper}>
-            <img
-              className={css.image}
-              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-              alt={movieName}
-            />
+      <main className={css.detailInfo}>
+        <div className={css.imageWrapper}>
+          <img
+            className={css.image}
+            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+            alt={movieName}
+          />
+        </div>
+        <div className={css.movieInfo}>
+          <h2 className={css.movieTitle}>{movieName}</h2>
+          <div className={css.movieScore}>
+            <span className={css.movieScoreText}>User score:</span>
+            <span>{score}%</span>
           </div>
-          <div className={css.infoMovie}>
-            <h2 className={css.movieTitle}>{movieName}</h2>
+          <div>
+            <span className={css.movieOverviewText}>
+              <span className={css.movieOverviewTitle}>Overview:</span>
+              {overview}
+            </span>
           </div>
-        </main>
-      )}
+          <div className={css.movieGenres}>
+            <span className={css.movieGenreTitle}>Genres:</span>
+            {genres.map((genre, index) => (
+              <span key={index}>{`${genre.name}${
+                genres.length - 1 === index ? '' : ','
+              }`}</span>
+            ))}
+          </div>
+        </div>
+      </main>
+
+      <section>
+        <h2>Additional information</h2>
+
+        <NavLink to="cast">Cast</NavLink>
+
+        <Outlet></Outlet>
+      </section>
     </section>
   );
 };
 
-export default App;
+export default MoviesDetail;
