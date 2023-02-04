@@ -3,6 +3,7 @@
   max-height: 90px;
   padding: 15px 20px;
   box-shadow: 1px 1px 5px grey;
+  font-size: var(--fsText);
 }
 
 .nav {

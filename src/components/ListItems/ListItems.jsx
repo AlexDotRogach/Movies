@@ -3,30 +3,35 @@ import { Link, useLocation } from 'react-router-dom';
 import { getGenre } from '../../services/movieApi/api';
 import { useQuery } from 'react-query';
 import { ReactComponent as Image18 } from '../../assets/18+.svg';
+import { path } from '../../const/messages';
+
+const { imageUrl200 } = path;
 const ListItems = ({ movies, page }) => {
   const { data } = useQuery('genre', getGenre);
+  const defaultGenres = ['no genres'];
   const location = useLocation();
 
+  const toLinkMovie = location.pathname === '/' ? 'movies/' : '';
   const getGenreByArrId = (genreArrId = []) => {
-    if (!data) return ['no genres'];
+    if (!data) return defaultGenres;
 
     const {
       data: { genres },
     } = data;
 
-    if (!genres.length) return ['no genres'];
+    if (!genres.length) return defaultGenres;
 
     const filterGenres = genres
       .filter(genre => genreArrId.includes(genre.id))
       .map(genre => genre.name);
 
-    if (!filterGenres.length) return ['no genres'];
+    if (!filterGenres.length) return defaultGenres;
 
     return filterGenres;
   };
 
   return (
-    <>
+    <ul className={css.list}>
       {movies.map(movie => {
         const name = movie.title || movie.name;
         const { id, vote_average, vote_count, genre_ids, poster_path, adult } =
@@ -44,7 +49,7 @@ const ListItems = ({ movies, page }) => {
         return (
           <li className={css.listItem} key={id}>
             <Link
-              to={`movies/${id}`}
+              to={`${toLinkMovie}${id}`}
               state={{ pageFrom: page }}
               className={css.listItemLink}
             >
@@ -57,7 +62,7 @@ const ListItems = ({ movies, page }) => {
 
                 <img
                   className={css.image}
-                  src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
+                  src={`${imageUrl200}${poster_path}`}
                   alt={name}
                 />
               </div>
@@ -94,9 +99,8 @@ const ListItems = ({ movies, page }) => {
           </li>
         );
       })}
-    </>
+    </ul>
   );
 };
-// https://image.tmdb.org/t/p/original/f02FFv77Rh62633YEjimv7C6JM3.jpg
-// https://image.tmdb.org/t/p/w500/f02FFv77Rh62633YEjimv7C6JM3.jpg
+
 export default ListItems;
