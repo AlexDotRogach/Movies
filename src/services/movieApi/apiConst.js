@@ -8,4 +8,6 @@ export const movieApiConst = {
   reviewsById: id =>
     `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${key}`,
   genre: `https://api.themoviedb.org/3/genre/movie/list?api_key=${key}`,
+  searchMovie: query =>
+    `https://api.themoviedb.org/3/search/movie?api_key=8c632f23c961af679604304d0473f75e&query=${query}`,
 };

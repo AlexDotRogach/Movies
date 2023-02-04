@@ -36,3 +36,14 @@ li {
   margin: 0;
   padding: 0;
 }
+
+
+@media (max-width: 400px) {
+  :root {
+    --fsText : 16px;
+  }
+
+  :root {
+    --fsText-sm : 12px;
+  }
+}

@@ -80,3 +80,57 @@
 .movieGenreTitle {
   font-weight: bold;
 }
+
+.additional {
+  composes: detail;
+}
+
+.additionalLink {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.additionalLink a {
+  text-decoration: none;
+  color: black;
+  width: 80px;
+  transition: transform .3s;
+}
+
+.additionalLink a:hover {
+  transform: scale(.95);
+}
+
+.activeLink {
+  transform: scale(1.1);
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+  background: black;
+  margin: 20px 0;
+}
+
+@media (max-width: 680px) {
+  .detailInfo {
+    flex-direction: column;
+  }
+
+  .imageWrapper {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .imageWrapper {
+    max-height: 300px;
+    max-width: 200px;
+  }
+
+  .movieGenres {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,23 @@
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reviewHeader {
+  display: flex;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.reviewDescribe {
+  margin-top: 10px;
+  text-align: justify;
+}
+
+@media (max-width: 400px) {
+  .reviewHeader {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { movieApiConst } from './apiConst';
 
-const { trendingDay, movieById, castById, reviewsById, genre } = movieApiConst;
+const { trendingDay, movieById, castById, reviewsById, searchMovie, genre } =
+  movieApiConst;
 export const getTrendingDay = page => {
   return axios.get(`${trendingDay}&page=${page}`).catch(function (error) {
     console.log(
@@ -30,5 +31,11 @@ export const getReviewsById = id => {
 export const getGenre = () => {
   return axios.get(`${genre}`).catch(function (error) {
     console.log(`Request error, try to find genres. Error - ${error}`);
+  });
+};
+
+export const getMovieByQuery = query => {
+  return axios.get(`${searchMovie(query)}`).catch(function (error) {
+    console.log(`Request error, try to find reviews. Error - ${error}`);
   });
 };

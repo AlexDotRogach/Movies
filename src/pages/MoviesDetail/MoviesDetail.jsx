@@ -11,38 +11,28 @@ import {
   NavLink,
   Outlet,
 } from 'react-router-dom';
-import { useQueries } from 'react-query';
+import { useQuery } from 'react-query';
+import { messages } from '../../const/messages';
 import Loader from '../../layouts/Loader';
 import Error from '../../layouts/Error';
+
+const { errorMessage } = messages;
 const MoviesDetail = () => {
   const { moviesId } = useParams();
   const { state } = useLocation();
 
   const pageFrom = state?.pageFrom ?? 1;
 
-  const movieInfoQueries = useQueries([
-    {
-      queryKey: `getMovieById-${moviesId}`,
-      queryFn: () => getMovieById(moviesId),
-    },
+  const { isLoading, error, isError, data } = useQuery(
+    [`getMovieById-${moviesId}`],
+    () => getMovieById(moviesId)
+  );
 
-    {
-      queryKey: `getCastById-${moviesId}`,
-      queryFn: () => getCastById(moviesId),
-    },
+  if (isLoading) return <Loader />;
 
-    {
-      queryKey: `getReviewsById-${moviesId}`,
-      queryFn: () => getReviewsById(moviesId),
-    },
-  ]);
+  if (isError) return <Error error={error?.message ?? errorMessage}></Error>;
 
-  const [movieQuery, castQuery, reviewsQuery] = movieInfoQueries;
-
-  if (movieQuery.isLoading || castQuery.isLoading || reviewsQuery.isLoading)
-    return <Loader />;
-
-  const movieRender = !!movieQuery.data;
+  const movieRender = !!data;
 
   if (!movieRender)
     return (
@@ -55,13 +45,13 @@ const MoviesDetail = () => {
     );
 
   const {
-    data: {
-      data: { poster_path, title, name, vote_average, overview, genres },
-    },
-  } = movieQuery;
+    data: { poster_path, title, name, vote_average, overview, genres },
+  } = data;
 
   const movieName = title || name;
   const score = Math.round(vote_average * 10);
+
+  const changeActive = ({ isActive }) => `${isActive ? css.activeLink : ''}`;
 
   return (
     <section className={css.detail}>
@@ -100,10 +90,19 @@ const MoviesDetail = () => {
         </div>
       </main>
 
-      <section>
+      <section className={css.additional}>
         <h2>Additional information</h2>
 
-        <NavLink to="cast">Cast</NavLink>
+        <div className={css.additionalLink}>
+          <NavLink to="cast" className={changeActive}>
+            Cast
+          </NavLink>
+          <NavLink to="reviews" className={changeActive}>
+            Reviews
+          </NavLink>
+        </div>
+
+        <div className={css.separator}></div>
 
         <Outlet></Outlet>
       </section>

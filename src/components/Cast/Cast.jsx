@@ -26,9 +26,6 @@ const Cast = () => {
     data: { cast },
   } = data;
 
-  console.log(cast);
-  //character , name, profile_path
-
   return (
     <ul className={css.cast}>
       {cast

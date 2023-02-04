@@ -31,11 +31,7 @@ const List = ({ page, changeTotalPage }) => {
 
   if (total_pages !== totalPage) setTotalPage(total_pages);
 
-  return (
-    <ul className={css.list}>
-      <ListItems movies={movies} page={page}></ListItems>
-    </ul>
-  );
+  return <ListItems movies={movies} page={page}></ListItems>;
 };
 
 export default List;

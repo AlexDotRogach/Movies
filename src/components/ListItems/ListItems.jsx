@@ -1,5 +1,5 @@
 import css from './ListItems.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getGenre } from '../../services/movieApi/api';
 import { useQuery } from 'react-query';
 import { ReactComponent as Image18 } from '../../assets/18+.svg';
@@ -9,7 +9,9 @@ const { imageUrl200 } = path;
 const ListItems = ({ movies, page }) => {
   const { data } = useQuery('genre', getGenre);
   const defaultGenres = ['no genres'];
+  const location = useLocation();
 
+  const toLinkMovie = location.pathname === '/' ? 'movies/' : '';
   const getGenreByArrId = (genreArrId = []) => {
     if (!data) return defaultGenres;
 
@@ -29,7 +31,7 @@ const ListItems = ({ movies, page }) => {
   };
 
   return (
-    <>
+    <ul className={css.list}>
       {movies.map(movie => {
         const name = movie.title || movie.name;
         const { id, vote_average, vote_count, genre_ids, poster_path, adult } =
@@ -47,7 +49,7 @@ const ListItems = ({ movies, page }) => {
         return (
           <li className={css.listItem} key={id}>
             <Link
-              to={`movies/${id}`}
+              to={`${toLinkMovie}${id}`}
               state={{ pageFrom: page }}
               className={css.listItemLink}
             >
@@ -97,7 +99,7 @@ const ListItems = ({ movies, page }) => {
           </li>
         );
       })}
-    </>
+    </ul>
   );
 };
 
