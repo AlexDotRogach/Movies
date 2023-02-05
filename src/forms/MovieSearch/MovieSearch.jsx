@@ -6,6 +6,7 @@ const MovieSearch = ({ searchMovie }) => {
     <form className={css.form} onSubmit={searchMovie}>
       <TextField
         id="outlined-basic"
+        className={css.input}
         label="Write name of movie!"
         variant="outlined"
         name="query"

@@ -91,7 +91,7 @@ const MoviesDetail = () => {
       </main>
 
       <section className={css.additional}>
-        <h2>Additional information</h2>
+        <h2 className={css.additionalTitle}>Additional information</h2>
 
         <div className={css.additionalLink}>
           <NavLink to="cast" className={changeActive}>
