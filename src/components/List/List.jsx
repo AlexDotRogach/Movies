@@ -1,4 +1,5 @@
 import css from './List.module.css';
+import PropTypes from 'prop-types';
 import ListItems from '../ListItems';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';

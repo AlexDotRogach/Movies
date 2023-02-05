@@ -4,11 +4,12 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { Routes, Route } from 'react-router-dom';
 import css from './App.module.css';
 import SharedLayout from '../../layouts/SharedLayout';
-import Home from '../../pages/Home';
-import Movies from '../../pages/Movies';
-import MoviesDetail from '../../pages/MoviesDetail';
 import Cast from '../Cast';
 import Reviews from '../Reviews';
+
+const Home = lazy(() => import('../../pages/Home'));
+const Movies = lazy(() => import('../../pages/Movies'));
+const MoviesDetail = lazy(() => import('../../pages/MoviesDetail'));
 
 const queryClient = new QueryClient();
 
