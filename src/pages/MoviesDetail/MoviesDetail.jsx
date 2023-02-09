@@ -1,9 +1,5 @@
 import css from './MoviesDetail.module.css';
-import {
-  getMovieById,
-  getCastById,
-  getReviewsById,
-} from '../../services/movieApi/api';
+import { getMovieById } from '../../services/movieApi/api';
 import {
   useParams,
   useLocation,
@@ -12,11 +8,12 @@ import {
   Outlet,
 } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { messages } from '../../const/messages';
+import { messages, path } from '../../const/messages';
 import Loader from '../../layouts/Loader';
 import Error from '../../layouts/Error';
 
 const { errorMessage } = messages;
+const { imageUrl500 } = path;
 const MoviesDetail = () => {
   const { moviesId } = useParams();
   const { state } = useLocation();
@@ -63,7 +60,7 @@ const MoviesDetail = () => {
         <div className={css.imageWrapper}>
           <img
             className={css.image}
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+            src={`${imageUrl500}${poster_path}`}
             alt={movieName}
           />
         </div>

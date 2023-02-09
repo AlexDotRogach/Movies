@@ -1,5 +1,6 @@
 import css from './PaginationButton.module.css';
 import Pagination from '@mui/material/Pagination';
+import PropTypes from 'prop-types';
 const screenWidth = window.innerWidth;
 
 const PaginationButton = ({ page, total, changePage }) => {
@@ -23,3 +24,9 @@ const PaginationButton = ({ page, total, changePage }) => {
 };
 
 export default PaginationButton;
+
+PaginationButton.propTypes = {
+  page: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  changePage: PropTypes.func.isRequired
+};
