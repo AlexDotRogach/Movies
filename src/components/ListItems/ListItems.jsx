@@ -1,4 +1,5 @@
 import css from './ListItems.module.css';
+import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import { getGenre } from '../../services/movieApi/api';
 import { useQuery } from 'react-query';
@@ -104,3 +105,8 @@ const ListItems = ({ movies, page }) => {
 };
 
 export default ListItems;
+
+ListItems.propTypes = {
+  page: PropTypes.number.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired
+};

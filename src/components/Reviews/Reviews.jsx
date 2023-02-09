@@ -29,11 +29,11 @@ const Reviews = () => {
 
   return (
     <ul className={css.reviews}>
-      {reviews.map(review => {
+      {reviews.map((review, index) => {
         const { author, content, created_at } = review;
 
         return (
-          <li>
+          <li key={index}>
             <div className={css.reviewHeader}>
               <span>{author}</span>
               <span>{created_at}</span>

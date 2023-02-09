@@ -30,11 +30,11 @@ const Cast = () => {
     <ul className={css.cast}>
       {cast
         .filter(person => person.profile_path)
-        .map(person => {
+        .map((person, index) => {
           const { profile_path, character, name } = person;
 
           return (
-            <li className={css.person}>
+            <li className={css.person} key={index}>
               <img
                 className={css.image}
                 src={`${imageUrl200}${profile_path}`}

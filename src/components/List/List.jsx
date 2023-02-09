@@ -36,3 +36,8 @@ const List = ({ page, changeTotalPage }) => {
 };
 
 export default List;
+
+List.propTypes = {
+  page: PropTypes.number.isRequired,
+  changeTotalPage: PropTypes.func.isRequired
+};
